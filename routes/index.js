@@ -20,7 +20,7 @@ router.post('/register', (req, res, next) => {
         }
 
         passport.authenticate('local')(req, res, () => {
-                // if successfully logged in create jwt token test
+                // if successfully logged in create jwt token
                 var payload = {username: req.body.username};
                 var token = 'Bearer ' + jwt.sign(payload, secretOrKey);
                 res.json({message: "use postman to get request /ping endpoint and check token validity", token: token});
