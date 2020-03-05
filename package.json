@@ -8,10 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:mjhea0/passport-local-express4.git"
+    "url": "git@github.com/Keno991/passport-local-jwt-express"
   },
-  "author": "Michael Herman <michael@mherman.org>",
-  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.10.2",
     "chai": "~1.8.1",
