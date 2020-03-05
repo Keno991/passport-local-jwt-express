@@ -34,7 +34,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
-        // from now on we'll identify the user by the username and the username is the only personalized value that goes into our token
+        // from now on we'll identify the user by the username and the username is the only personalized value that goes into our token,
         // if successfully logged in create jwt token
         var payload = {username: req.body.username};
         var token = 'Bearer ' + jwt.sign(payload, secretOrKey);
