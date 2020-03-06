@@ -8,4 +8,5 @@ block content
       a(href="/register") Register
     if (user)
       p You are currently logged in as #{user.username}
-      a(href="/logout") Logout
+      br
+      p Use postman to GET request /ping endpoint with token in Authorization header to check validity: #{token}

@@ -6,7 +6,7 @@ const router = express.Router();
 const secretOrKey = 'secret';
 
 router.get('/', (req, res) => {
-    res.render('index', { user : req.user });
+    res.render('index');
 });
 
 router.get('/register', (req, res) => {
@@ -21,9 +21,8 @@ router.post('/register', (req, res, next) => {
 
         passport.authenticate('local')(req, res, () => {
                 // if successfully logged in create jwt token
-                var payload = {username: req.body.username};
-                var token = 'Bearer ' + jwt.sign(payload, secretOrKey);
-                res.json({message: "use postman to get request /ping endpoint and check token validity", token: token});
+                var token = createToken({ username: req.body.username });
+                res.render('index', { user: req.user, token: token });
         });
     });
 });
@@ -36,9 +35,8 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
         // from now on we'll identify the user by the username and the username is the only personalized value that goes into our token,
         // if successfully logged in create jwt token
-        var payload = {username: req.body.username};
-        var token = 'Bearer ' + jwt.sign(payload, secretOrKey);
-        res.json({message: "use postman to get request /ping endpoint and check token validity", token: token});
+        var token = createToken({ username: req.body.username });
+        res.render('index', { user: req.user, token: token });
 });
 
 router.get('/logout', (req, res, next) => {
@@ -48,5 +46,11 @@ router.get('/logout', (req, res, next) => {
 router.get('/ping', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.status(200).send("pong!");
 });
+
+function createToken(claimsObj){
+    if(!!claimsObj) {
+        return 'Bearer ' + jwt.sign(claimsObj, secretOrKey);
+    }
+}
 
 module.exports = router;
