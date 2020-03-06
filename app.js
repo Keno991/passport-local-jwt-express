@@ -10,7 +10,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
 
 const routes = require('./routes/index');
-
 const Account = require('./models/account');
 
 const JwtStrategy = require('passport-jwt').Strategy,
@@ -43,10 +42,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', routes);
+// PassportJs middlewares
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.use(new JwtStrategy(opts,  function(jwt_payload, next) {
     console.log('payload received', jwt_payload);
-    var dbUser = Account.find({username: jwt_payload.username},(err, data) =>{
+    Account.find({username: jwt_payload.username},(err, data) =>{
         if (data.length > 0) {
             next(null, data[0]);
           } else {
