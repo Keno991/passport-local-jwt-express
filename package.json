@@ -11,12 +11,12 @@
     "url": "git@github.com/Keno991/passport-local-jwt-express"
   },
   "dependencies": {
-    "body-parser": "^1.10.2",
+    "body-parser": "^1.20.1",
     "chai": "~1.8.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.3.3",
     "debug": "^2.1.1",
-    "express": "^4.11.1",
+    "express": "^4.18.2",
     "express-session": "^1.10.1",
     "jade": "^1.9.1",
     "mocha": "~1.14.0",
